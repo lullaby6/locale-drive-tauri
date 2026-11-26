@@ -15,7 +15,10 @@ Node.js does not need to be installed: the app ships its own.
 
 ## Download
 
-Get the installer (`Locale Drive_x.x.x_x64-setup.exe`) from the [releases](https://github.com/lullaby6/locale-drive-tauri/releases) and run it.
+Get it from the [releases](https://github.com/lullaby6/locale-drive-tauri/releases):
+
+- **Installer** (`Locale Drive_x.x.x_x64-setup.exe`): run it and open Locale Drive from the Start menu.
+- **Portable** (`Locale Drive_x.x.x_x64-portable.zip`): unzip it anywhere and open `Locale Drive.exe`. Keep the files of the folder together.
 
 - Requires **Windows 10 or 11**.
 - The first time it opens, Windows Firewall asks whether `node` may use the network: allow it on **private networks**, or other devices won't be able to connect.
@@ -55,7 +58,8 @@ npm run setup
 | Command | What it does |
 | --- | --- |
 | `npm start` | Runs the app in development mode |
-| `npm run build` | Builds the installer into `src-tauri/target/release/bundle/nsis/` |
+| `npm run build` | Builds the installer into `src-tauri/target/release/bundle/nsis/` and the portable `.zip` into `src-tauri/target/release/bundle/portable/` |
+| `npm run build-portable` | Only packs the portable `.zip` again from the last build |
 | `npm run build-server` | Prepares the server and Node.js (runs automatically before `start` and `build`) |
 | `npm run build-frontend` | Same, but first rebuilds the web app from the `locale-drive-frontend` submodule |
 | `npm run icons` | Regenerates the app icons from the Locale Drive logo |
