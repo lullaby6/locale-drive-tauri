@@ -1,6 +1,6 @@
 {
   "name": "locale-drive-tauri",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Desktop app for Locale Drive: share and transfer files across your local network",
   "private": true,
   "type": "module",
