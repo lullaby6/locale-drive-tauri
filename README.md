@@ -15,7 +15,7 @@ Node.js does not need to be installed: the app ships its own.
 
 ## Download
 
-Get it from the [releases](https://github.com/lullaby6/locale-drive-tauri/releases):
+Get it from the [Locale Drive releases](https://github.com/lullaby6/locale-drive/releases):
 
 - **Installer** (`Locale Drive_x.x.x_x64-setup.exe`): run it and open Locale Drive from the Start menu.
 - **Portable** (`Locale Drive_x.x.x_x64-portable.zip`): unzip it anywhere and open `Locale Drive.exe`. Keep the files of the folder together.
