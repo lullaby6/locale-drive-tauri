@@ -2,7 +2,14 @@
 
 The desktop app for [Locale Drive](https://github.com/lullaby6/locale-drive): share and transfer files across your local network, like a "Google Drive" for your LAN, from a Windows app instead of the terminal.
 
-Open the app and it starts the Locale Drive server for you, shows the app in its own window, and every device on the same Wi-Fi can connect from a browser with the QR code or link shown in the app. Closing the window stops the server.
+Open the app and it starts the Locale Drive server in the background and opens it in your default browser. Every device on the same Wi-Fi can connect with the QR code or link shown in the page.
+
+The app lives in the notification area (system tray), next to the clock:
+
+- **Click** the icon, or choose **Open**, to open the page again.
+- **Right click** and choose **Exit** to stop the server and close the app.
+
+Opening the app again while it is running just opens the page.
 
 Node.js does not need to be installed: the app ships its own.
 
@@ -11,26 +18,23 @@ Node.js does not need to be installed: the app ships its own.
 Get the installer (`Locale Drive_x.x.x_x64-setup.exe`) from the [releases](https://github.com/lullaby6/locale-drive-tauri/releases) and run it.
 
 - Requires **Windows 10 or 11**.
-- The window uses Microsoft Edge WebView2, which Windows 10 and 11 already include. If it is missing, the installer downloads it.
 - The first time it opens, Windows Firewall asks whether `node` may use the network: allow it on **private networks**, or other devices won't be able to connect.
 
 Files are stored in `Documents\Locale Drive`.
 
 ## How it works
 
-Locale Drive is an Express server that also serves its React web app, so the desktop app is a [Tauri](https://tauri.app) shell around it:
+Locale Drive is an Express server that also serves its React web app, so the desktop app is a small [Tauri](https://tauri.app) app with no window that runs it:
 
-1. The window opens on a small loading page ([`splash/`](splash/index.html)).
-2. The app runs the server (`locale-drive/src/index.js`) with a bundled Node.js, as a Tauri sidecar.
-3. Once the server prints the port it listens on, the window loads `http://127.0.0.1:<port>`. Other devices keep using the LAN address, as with the CLI.
-4. If the server stops, the window goes back to the loading page and shows its output.
-5. The server is stopped when the app exits, and on Windows it is also tied to the app's process, so it never keeps running (and sharing files) after a crash.
+1. The app adds its icon to the notification area and runs the server (`locale-drive/src/index.js`) with a bundled Node.js, as a Tauri sidecar.
+2. Once the server prints its LAN address, the app opens it in the default browser, as the CLI does.
+3. If the server stops on its own, a message box shows its output and the app closes.
+4. The server is stopped when the app exits, and on Windows it is also tied to the app's process, so it never keeps running (and sharing files) after a crash.
 
 ## Project structure
 
 ```
 locale-drive/              git submodule: the server, with its built web app in src/public
-splash/                    loading and error page shown before the server is up
 scripts/prepare-server.js  copies the server and its production dependencies into
                            src-tauri/server/ and Node.js into src-tauri/binaries/
 src-tauri/                 the Tauri app (Rust)
