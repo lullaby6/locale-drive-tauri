@@ -1,0 +1,21 @@
+{
+  "name": "locale-drive-tauri",
+  "version": "2.0.0",
+  "description": "Desktop app for Locale Drive: share and transfer files across your local network",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "git submodule update --init --recursive && npm install",
+    "build-server": "node scripts/prepare-server.js",
+    "build-frontend": "node scripts/prepare-server.js --frontend",
+    "icons": "tauri icon locale-drive/src/public/icon-512.png",
+    "start": "tauri dev",
+    "build": "tauri build",
+    "tauri": "tauri"
+  },
+  "author": "github.com/lullaby6",
+  "license": "MIT",
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

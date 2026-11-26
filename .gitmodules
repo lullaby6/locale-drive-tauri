@@ -1,0 +1,3 @@
+[submodule "locale-drive"]
+	path = locale-drive
+	url = https://github.com/lullaby6/locale-drive
