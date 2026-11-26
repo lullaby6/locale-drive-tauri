@@ -10,7 +10,8 @@
     "build-frontend": "node scripts/prepare-server.js --frontend",
     "icons": "tauri icon locale-drive/src/public/icon-512.png",
     "start": "tauri dev",
-    "build": "tauri build",
+    "build": "tauri build && npm run build-portable",
+    "build-portable": "node scripts/build-portable.js",
     "tauri": "tauri"
   },
   "author": "github.com/lullaby6",
