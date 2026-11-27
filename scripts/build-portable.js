@@ -13,6 +13,12 @@ const root = path.resolve(import.meta.dirname, '..');
 const release = path.join(root, 'src-tauri', 'target', 'release');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'src-tauri', 'tauri.conf.json'), 'utf8'));
 
+// "version" can be the version itself or the path to a package.json to take it from
+// (it is "../locale-drive/package.json", relative to src-tauri, so it follows Locale Drive)
+const version = config.version.endsWith('.json')
+    ? JSON.parse(fs.readFileSync(path.join(root, 'src-tauri', config.version), 'utf8')).version
+    : config.version;
+
 const name = config.productName;
 const exe = `${config.mainBinaryName}.exe`;
 const files = [exe, 'node.exe', 'server'];
@@ -25,7 +31,7 @@ if (missing.length > 0) {
 
 const output = path.join(release, 'bundle', 'portable');
 const folder = path.join(output, name);
-const zip = path.join(output, `${name}_${config.version}_x64-portable.zip`);
+const zip = path.join(output, `${name}_${version}_x64-portable.zip`);
 
 // Stage the files in a "Locale Drive" folder, so unzipping doesn't scatter them.
 fs.rmSync(output, { recursive: true, force: true });
